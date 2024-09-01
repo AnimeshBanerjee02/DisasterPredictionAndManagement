@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Earthquake Magnitude Prediction</title>
+</head>
+<body>
+    <h1>Earthquake Magnitude Prediction</h1>
+    <form id="prediction-form">
+        <label for="latitude">Latitude:</label>
+        <input type="text" id="latitude" name="latitude" placeholder="Enter latitude"><br><br>
+
+        <label for="longitude">Longitude:</label>
+        <input type="text" id="longitude" name="longitude" placeholder="Enter longitude"><br><br>
+
+        <label for="date">Date:</label>
+        <input type="date" id="date" name="date"><br><br>
+
+        <button type="button" onclick="predictMagnitude()">Predict Magnitude</button>
+    </form>
+
+    <div id="prediction-result"></div>
+
+    <script>
+        function predictMagnitude() {
+            var latitude = document.getElementById("latitude").value;
+            var longitude = document.getElementById("longitude").value;
+            var date = document.getElementById("date").value;
+
+            var formData = new FormData();
+            formData.append('latitude', latitude);
+            formData.append('longitude', longitude);
+            formData.append('date', date);
+
+            fetch('/predict', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById("prediction-result").innerHTML = "<h3>Predicted Magnitudes:</h3>";
+                for (const [model, magnitude] of Object.entries(data)) {
+                    document.getElementById("prediction-result").innerHTML += "<p><strong>" + model + ":</strong> " + magnitude.toFixed(2) + "</p>";
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
+    </script>
+</body>
+</html>

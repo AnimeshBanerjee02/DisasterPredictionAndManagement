@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tsunami Prediction</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url("static\\index.jpg");
+            background-size: cover;
+            background-repeat: no-repeat;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            max-width: 800px; /* Increased max-width */
+            background-color: #beb38e00;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 100px;
+        }
+
+        .input-field {
+            margin-bottom: 10px;
+        }
+
+        .input-field label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .input-field input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .submit-btn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .submit-btn:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Tsunami Prediction</h1>
+        <form action="/predict" method="post">
+            <div class="input-field">
+                <label for="country">Enter the country:</label>
+                <input type="text" id="country" name="country" required>
+            </div>
+            <div class="input-field">
+                <label for="year">Enter the year:</label>
+                <input type="number" id="year" name="year" required>
+            </div>
+            <button type="submit" class="submit-btn">Submit</button>
+        </form>
+    </div>
+</body>
+</html>

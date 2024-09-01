@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Result</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+        font-family: Arial, sans-serif;
+        background-image: url("static\\tsunami-7809933_640.jpg");
+        background-size: cover; 
+        background-repeat: no-repeat;
+        margin: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+
+
+        .container {
+            max-width: 600px;
+            background-color: #f6fbfae1;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            text-align: center;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+        }
+
+        p {
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+
+        canvas {
+            max-width: 100%;
+            height: auto;
+            max-height: 300px; /* Adjust the height as needed */
+            background-color: rgba(231, 235, 10, 0); /* Change background color */
+        }
+
+        a {
+            display: inline-block;
+            background-color: #40a640;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+            margin-top: 20px;
+        }
+
+        a:hover {
+            background-color: #f8fef9;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Result</h1>
+        <p>Predicted EVENT_VALIDITY: {{ prediction }}</p>
+        <canvas id="resultChart"></canvas>
+        <a href="/">Go back to Tsunami Prediction page</a>
+    </div>
+
+    <script>
+        var prediction = "{{ prediction }}";
+        var predictionLevels = {
+            "Very Doubtful Tsunami": 1,
+            "Questionable Tsunami": 2,
+            "Probable Tsunami": 3,
+            "Event that only caused a seiche or disturbance in an inland river": 4,
+            "Definite Tsunami": 5
+        };
+        var predictionData = Array(5).fill(0);
+        predictionData[predictionLevels[prediction] - 1] = 1;
+
+        var ctx = document.getElementById('resultChart').getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ["Very Doubtful Tsunami", "Questionable Tsunami", "Probable Tsunami", "Event that only caused a seiche or disturbance in an inland river", "Definite Tsunami"],
+                datasets: [{
+                    label: 'Prediction Level',
+                    data: predictionData,
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(153, 102, 255, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            stepSize: 1
+                        }
+                    }
+                },
+                responsive: true,
+                maintainAspectRatio: false
+            }
+        });
+    </script>
+</body>
+</html>

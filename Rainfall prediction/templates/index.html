@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rainfall Prediction</title>
+    <style>
+        /* styles.css */
+
+body {
+    font-family: Arial, sans-serif;
+    background-image: url('static\\rain.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: black;
+}
+
+.container {
+    max-width: 400px;
+    background-color: #ffffffad; /* White container background color */
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1); /* Soft shadow effect */
+    padding: 40px;
+    box-sizing: border-box;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333333; /* Dark text color */
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    margin-bottom: 10px;
+    color: #555555; /* Medium gray color */
+}
+
+input[type="text"],
+input[type="number"],
+button {
+    padding: 12px;
+    border: 1px solid #cccccc; /* Light gray border */
+    border-radius: 5px;
+    margin-bottom: 20px;
+    width: calc(100% - 24px);
+    box-sizing: border-box;
+    transition: border-color 0.3s ease; /* Smooth transition effect */
+}
+
+button {
+    background-color: #007bff; /* Blue button color */
+    color: #ffffff; /* White text color */
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3; /* Darker blue color on hover */
+}
+
+input[type="text"]:focus,
+input[type="number"]:focus,
+button:focus {
+    outline: none;
+    border-color: #007bff; /* Blue border color on focus */
+}
+
+    </style>
+
+</head>
+<body>
+    <div class="container">
+        <h1>Rainfall Prediction</h1>
+        <form action="/predict" method="POST">
+            <label for="subdivision">Subdivision:</label>
+            <input type="text" id="subdivision" name="subdivision" required>
+            <label for="year">Year:</label>
+            <input type="number" id="year" name="year" min="1901" required>
+
+            <label for="rainfall_period">Rainfall Period:</label>
+            <input type="text" id="rainfall_period" name="rainfall_period" required>
+            <button type="submit">Predict</button>
+        </form>
+    </div>
+</body>
+</html>
